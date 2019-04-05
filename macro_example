@@ -1,0 +1,22 @@
+@echo off
+ECHO You have 5 sec to close this Window to prevent the Macro from running...
+timeout 5
+ECHO Start Firefox and wait another 10 seconds...
+start /B "" "C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
+timeout 10
+set "tempfile=C:\Users\Public\Documents\iMacros\Macros\flag.txt"
+echo macro 1 running
+type nul>"%tempfile%"    
+start "" /w /b "C:\Program Files (x86)\Mozilla Firefox\firefox.exe" imacros://run/?m="mymacro1.iim"
+:loop1
+if exist "%tempfile%" ping -n 10 localhost >nul & goto :loop1
+echo macro 2 running
+type nul>"%tempfile%"    
+start "" /w /b "C:\Program Files (x86)\Mozilla Firefox\firefox.exe" imacros://run/?m="mymacro2.iim"    
+:loop2
+if exist "%tempfile%" ping -n 10 localhost >nul & goto :loop2
+echo macro 3 running
+type nul>"%tempfile%"    
+start "" /w /b C:\Program Files (x86)\Mozilla Firefox\firefox.exe" imacros://run/?m="mymacro3.iim"
+:loop3
+if exist "%tempfile%" ping -n 10 localhost >nul & goto :loop3
